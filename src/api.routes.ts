@@ -1,10 +1,8 @@
-import { Request, Response } from "express";
 import { Router } from "express";
+import authRouter from "./routes/auth.routes";
 
 const mainRoutes = Router();
 
-mainRoutes.get("/", (req: Request, res: Response) => {
-  res.status(200).send("<h1 align='center'>Welcome to Sahaj Yatra API</h1>");
-});
+mainRoutes.use("/auth", authRouter);
 
 export default mainRoutes;

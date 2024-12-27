@@ -2,6 +2,7 @@ import express from "express";
 import helmet from "helmet";
 import cors from "cors";
 import "dotenv/config";
+import mainRoutes from "./api.routes";
 
 const app = express();
 
@@ -43,6 +44,7 @@ app.use(cors(corsOptions));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(mainRoutes);
 
 app.use("*", (req, res) => {
   res.status(401).json({ error: "End point not found" });
