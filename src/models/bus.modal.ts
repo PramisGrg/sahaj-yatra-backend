@@ -30,6 +30,7 @@ export interface IBusOwner extends Document {
   createdAt: Date;
   updatedAt: Date;
 }
+
 const saleSchema = new Schema(
   {
     amount: {

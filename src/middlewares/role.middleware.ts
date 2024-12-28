@@ -45,7 +45,7 @@ const validateToken = async (
   req: Request,
   res: Response,
   next: NextFunction
-) => {
+): Promise<any> => {
   try {
     const { authorization } = req.headers;
     if (!authorization) return throwError(req, res, "Missing auth header", 401);
@@ -77,11 +77,20 @@ const validateToken = async (
   }
 };
 
-const isSuperAdmin = async (req: Request, res: Response, next: NextFunction) =>
-  checkRole(req, res, next, "superAdmin");
-const isBusOwner = async (req: Request, res: Response, next: NextFunction) =>
-  checkRole(req, res, next, "busOwner");
-const isUser = async (req: Request, res: Response, next: NextFunction) =>
-  checkRole(req, res, next, "user");
+const isSuperAdmin = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<any> => checkRole(req, res, next, "superAdmin");
+const isBusOwner = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<any> => checkRole(req, res, next, "busOwner");
+const isUser = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<any> => checkRole(req, res, next, "user");
 
 export { isSuperAdmin, isBusOwner, isUser, validateToken };
