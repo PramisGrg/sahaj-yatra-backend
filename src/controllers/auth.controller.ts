@@ -180,10 +180,11 @@ const superAdminLogin = async (
       return throwError(req, res, "Invalid Credentials", 403);
     }
     if (!process.env.PASSWORD) return throwError(req, res, "Server error", 500);
-    const isPasswordValid = await bcrypt.compare(
-      password,
-      process.env.PASSWORD
-    );
+    // const isPasswordValid = await bcrypt.compare(
+    //   password,
+    //   process.env.PASSWORD
+    // );
+    const isPasswordValid = password === process.env.PASSWORD;
     if (!isPasswordValid) {
       return throwError(req, res, "Invalid Credentials", 403);
     }

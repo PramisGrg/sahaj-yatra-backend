@@ -2,7 +2,6 @@ import { Router } from "express";
 import authController from "../controllers/auth.controller";
 import { userRegisterSchema } from "../schema/auth.schema";
 import { validateBody } from "../middlewares/validatebody.middleware";
-
 const router = Router();
 
 //USER AUTH ROUTES

@@ -1,18 +1,20 @@
-import type { Request, Response, NextFunction } from "express";
-import { ZodSchema, ZodError } from "zod";
+import { Request, Response, NextFunction } from "express";
+import { z, ZodError, ZodSchema } from "zod";
 
 export function validateBody(schema: ZodSchema) {
-  return async (
-    req: Request,
-    res: Response,
-    next: NextFunction
-  ): Promise<any> => {
+  return (req: Request, res: Response, next: NextFunction) => {
     try {
-      const parseResult = schema.parse(req.body);
-      req.body = parseResult;
-      return next();
+      schema.parse(req.body);
+      next();
     } catch (error) {
-      return next(error);
+      if (error instanceof ZodError) {
+        const errorMessages = error.errors.map((issue: any) => ({
+          message: `${issue.message}`,
+        }));
+        res.status(401).json({ error: "Invalid data", errors: errorMessages });
+      } else {
+        res.status(500).json({ error: "Internal Server Error" });
+      }
     }
   };
 }

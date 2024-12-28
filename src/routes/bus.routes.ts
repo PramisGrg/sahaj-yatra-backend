@@ -12,14 +12,11 @@ router.get(
   isBusOwner,
   busController.getBusesForIndividualBusOwnerController
 );
-
 router.post("/", validateToken, isBusOwner, busController.registerBus);
 
 // update your bus location with request from nodemcu providing latitude and longitude in queries
 router.get("/location", busController.updateBusCurrentLocation);
-
 router.get("/:busId", busController.getIndividualBusController);
-
 router.get("/:busId/location", busController.getBusLocation);
 
 export default router;
