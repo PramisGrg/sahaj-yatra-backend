@@ -101,14 +101,14 @@ const busOwnerLogin = async (
       phoneNumber: phoneNumber,
     });
     if (!existingBusOwner) {
-      return throwError(req, res, "Invalid Credentials", 404);
+      return throwError(req, res, "Invalid credentials", 404);
     }
     const isPasswordValid = await bcrypt.compare(
       password,
       existingBusOwner?.password || ""
     );
     if (!isPasswordValid) {
-      return throwError(req, res, "Invalid Credentials", 403);
+      return throwError(req, res, "Invalid password", 403);
     }
     const token = jwt.sign(
       {
@@ -188,6 +188,7 @@ const superAdminLogin = async (
     if (!isPasswordValid) {
       return throwError(req, res, "Invalid Credentials", 403);
     }
+
     const token = jwt.sign(
       {
         id: process.env.SUPER_ADMIN_ID,
@@ -196,6 +197,7 @@ const superAdminLogin = async (
       process.env.JWT_SECRET as string,
       { expiresIn: "1d" }
     );
+
     res.status(200).json({
       message: "Super Admin Login Successful",
       token: token,

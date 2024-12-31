@@ -8,7 +8,7 @@ const app = express();
 
 app.use(helmet());
 
-const allowedOrigin = "http://localhost:5173";
+const allowedOrigin = "http://localhost:3001";
 
 const corsOptions: any = {
   origin: function (origin: string, callback: Function) {
