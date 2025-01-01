@@ -2,6 +2,7 @@ import { Router } from "express";
 import {
   getSuperAdminDashboardController,
   getUserDashboardController,
+  getBusownerDashboardController,
 } from "../controllers/dashboard.controller";
 import {
   isBusOwner,
@@ -12,12 +13,12 @@ import {
 
 const dashboardRouter = Router();
 
-// dashboardRouter.get(
-//   "/busowner",
-//   validateToken,
-//   isBusOwner,
-//   getBusownerDashboardController
-// );
+dashboardRouter.get(
+  "/busowner",
+  validateToken,
+  isBusOwner,
+  getBusownerDashboardController
+);
 dashboardRouter.get("/user", validateToken, isUser, getUserDashboardController);
 dashboardRouter.get(
   "/superadmin",
