@@ -8,7 +8,10 @@ const app = express();
 
 app.use(helmet());
 
-const allowedOrigin = "http://localhost:3001";
+const allowedOrigin = [
+  "http://localhost:3001",
+  "https://sahaj-yatra-frontend.vercel.app",
+];
 
 const corsOptions: any = {
   origin: function (origin: string, callback: Function) {
